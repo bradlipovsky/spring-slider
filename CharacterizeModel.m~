@@ -1,0 +1,48 @@
+clear;
+
+
+% Load the parameters
+% M = LoadParams(['Event' num2str(T.EventNumber) '_' num2str(labelTime) 's_' label]);
+% Compare these two events:
+% 'Event47_355s_MoreCompliantBed'
+% 'Event49_580s_MoreCompliantBed'
+% label = 'RN-fit';
+% labelTime = 580;
+T.EventNumber = 49;
+% M = LoadParams('MoreCompliantBed_PartSim');
+M = LoadParams('InertialStability');
+
+% Run the slider
+M.WindowDuration = 2;
+tic; [vtr,dt,D] = RunSlider(M); toc;
+disp('----------------------------------------------');
+disp(' ');                  %
+disp(['   Slip / Event      ' num2str(D*1e6)]);
+disp(' ');
+disp('----------------------------------------------');
+t = dt*(0:numel(vtr)-1);
+
+
+
+% Make plots
+figure(1); clf;
+subplot(1,2,1);
+offset= -0.005;
+plot(t,detrend(vtr),'linewidth',2); 
+xlabel('Time (s)');
+ylabel('Seismic Particle Velocity (nm/s)');
+
+subplot(1,2,2);
+[ft2,f2] = bft( vtr,dt );
+plot(f2,abs(ft2),'-','linewidth',2);
+xlim([5 90]); ylim([0 50]); % Event 49
+xlabel('Frequency (Hz)'); ylabel('Spectral Power (m/s)^2 / Hz');
+set(gca,'fontsize',
+
+tt=toc;
+disp(' ');
+disp('----------------------------------------------');
+disp(' ');
+disp(['Total Run Time is ' num2str(tt)]);
+disp(' ');
+disp('----------------------------------------------');
