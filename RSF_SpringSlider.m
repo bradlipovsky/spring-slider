@@ -19,8 +19,7 @@ clear;
 
 % Load the parameters
 % M = LoadParams('RigidBed');
-% M = LoadParams('CompliantBed','verbose',1);
-% M = LoadParams('CompliantBed');
+M = LoadParams('CompliantBed');
 
 % Run the slider
 M.WindowDuration = 2;
