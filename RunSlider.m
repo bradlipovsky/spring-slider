@@ -16,15 +16,14 @@ tmax=tmax0;
 
 % Set initial conditions
 Vini = M.Vs;
-% M.Q0 = M.f0-M.b*log(Vini/M.V0); % initial state
 M.Q0 =  -M.b*log(Vini/M.V0); % initial state
 T0 = (M.f0+(M.a-M.b)*log(Vini/M.V0))*M.N; % initial shear stress (MPa)
 M.D0 = -T0/M.k; % initial slip (m), set from initial stress
 
 % Run the simulation
-[t,D,~,V,dQdt,~] = slider(M,tmin,tmax);
+[t,D,Q,V,dQdt,~] = slider(M,tmin,tmax);
 
-
+T = M.a.*log(V/M.V0) + Q;
 
 % Check to make sure that stick-slip events are happening.
 % T = calcT(t,V);
@@ -38,9 +37,7 @@ M.D0 = -T0/M.k; % initial slip (m), set from initial stress
 % tau = -M.k*D - M.eta*V;
 
 % High-frequency amplitude calculation
-% fs2 = 1e5;
-fs2 = 1/min(diff(t));
-dt = 1/fs2; 
+fs2 = 1/min(diff(t));  dt = 1/fs2; 
 t2 = min(t):dt:max(t);
 N2 = numel(t2); if mod(N2,2), t2 = min(t2):dt:max(t2)-dt; end
 A = (M.alpha-M.k*V-M.N*dQdt)./(M.a*M.N./V+M.eta);   % slip acceleration A=dV/dt

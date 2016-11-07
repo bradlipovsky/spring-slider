@@ -10,16 +10,6 @@ function [V,dQ,n] = rates(D,Q,t,M,Vo)
 % set rates to absurd values so error estimator will reject step
 if isnan(Q),  V=1e9; dQ=1e9; n=0;  return, end ;
 
-
-% If the patch size changes, recalcuate the patch stiffness
-if isfield(M,'dRdt')
-    dR = M.dRdt*t;
-    R = M.R + dR;
-    k = M.k*M.R/R;
-else
-    k = M.k;
-end
-
 % Set tauL as a function of time
 switch M.load
     case 'constant'
@@ -59,7 +49,6 @@ for n=1:nmax % evaluate F = stress-strength
     % Test for convergence on F
     if abs(F)<atol
         dQ = evolveQ(V,Q,M);
-
         return
     end
 

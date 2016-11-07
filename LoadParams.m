@@ -1,12 +1,13 @@
 function M = LoadParams(varargin)
-
-% M.Vs = 7e-4; % 100s GPS lowpass (Event 49)
-% M.Vs = 6.02e-4; % 1000s GPS lowpass (Event 49)
-% M.Vs = 4.5e-4; % 100s GPS lowpass (Event 29)
+%
+% This file sets the parameters for various cases.  The default parameters
+% are listed first.  These are then modified for each particular case
+% below.
+%
 
 verbose = 1;
 if numel (varargin) == 0
-    situ = 'CompliantBed2';
+    situ = 'CompliantBed';
 else
     situ = varargin{1};
     if numel (varargin) > 1
@@ -16,19 +17,18 @@ else
     end
 end
 
-% These parameters are usually not changed
-M.f0 = 0.4;
-M.Q_ice = 500;
-M.c_ice = 2000;
-M.G_ice = 3664;
-M.H = 800;
+% Default parameters
+M.f0 = 0.4;     % static coefficient of friction
+M.Q_ice = 500;  % quality factor
+M.c_ice = 2000; % wavespeed
+M.G_ice = 3664; % shear modulus
+M.H = 800;      % source-reciever distance
 M.V0 = 10^-5;
-M.dt = 0.5e-3;
-M.nui = 0.33;
-M.nub = 0.49;
+M.dt = 0.5e-3;  % default time step
+M.nui = 0.33;   % Poisson ratio in upper material
+M.nub = 0.49;   % Poisson ratio in lower material
 M.WindowDuration = 10;
 
-% Default Tunable parameters
 M.a = 0.005;
 M.b = 0.015;
 M.G_till = 100;
@@ -41,7 +41,7 @@ M.L2 = M.L;
 
 FullSim=0;
 switch situ
-    % Tunable parameters
+    % Particular cases
 
       
         case 'CompliantBed'
@@ -54,7 +54,7 @@ switch situ
         
         M.G_till = 10;
         M.R = 3.3;
-        M.N = 0.01;
+        M.N = 0.04;
         
         
         
@@ -67,6 +67,28 @@ switch situ
         M.R = 3.3;
         M.N = 0.1;
         M.D = M.Vs/M.f1;
+        
+        
+        case 'SubductionZone'
+        verbose=0;
+        
+        % 40 mm/yr loading rate
+        M.Vs = 1.27e-9; 
+        M.V0 = M.Vs;
+        
+        % Both sides of the fault have the same material
+        M.G_ice = 1e4; M.G_till = M.G_ice;
+        M.nui = 0.25; M.nub = 0.25;
+        
+        % 10m fault radius
+        M.R = 10;
+        
+        % Normal stress is 1 kPa
+        M.N = 1;
+        
+        % source-reciever distance
+        M.H = 15e3;
+        
 
 
 end
