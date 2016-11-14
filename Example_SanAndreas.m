@@ -18,11 +18,12 @@
 clear;
 
 % Load the parameters
-% M = LoadParams('RigidBed');
-M = LoadParams('DavidGlacier');
+M = LoadParams('SanAndreas');
+
+% How long to run the simulation (in seconds)
+M.WindowDuration = 86400 * 365;
 
 % Run the slider
-M.WindowDuration = 60*60;
 tic; [vtr,dt,D] = RunSlider(M); tt=toc;
 disp(['Simulation done in ' num2str(tt) ' s.']);
 
