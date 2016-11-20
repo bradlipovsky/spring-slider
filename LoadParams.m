@@ -18,7 +18,9 @@ else
 end
 
 % Default parameters
+
 M.f0 = 0.4;     % static coefficient of friction
+M.FarfieldVelocity = 1; % Interpret output velocities as far field velocities (set to zero to interpret as sliding velocities)
 M.Q_ice = 500;  % quality factor
 M.c_ice = 2000; % wavespeed
 M.G_ice = 3664; % shear modulus (MPa)
@@ -42,15 +44,13 @@ switch situ
     % Particular cases
     
         case 'SanAndreas'
-            
-        M.Vs = 0.4/3.14e7;       % Far-field loading rate
-        M.Q_ice = 100;          % quality factor
+   		M.FarfieldVelocity = 0; % Interpret velocities as sliding velocities (much faster...)
+        M.Vs = 0.4/3.14e7;      % Far-field loading rate 40cm/yr
         M.c_ice = 4000;         % wavespeed
         M.G_ice = 50e4;         % Shear modulus (MPa)
         M.G_till = M.G_ice;     % Shear modulus (MPa) is identical on both sides
-        M.R = 200;              % Fault Size (m)
-        M.N = 1;                % Effective normal stress (MPa)
-        M.H = 10e3;             % Source-to-receiver distance
+        M.R = 10e3;              % Fault Size (m)
+        M.N = 10;               % Effective normal stress (MPa)
         M.L = 1e-4;             % Frictional state evolution distance
         
         case 'DavidGlacier'
