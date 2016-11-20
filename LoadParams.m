@@ -49,9 +49,9 @@ switch situ
         M.c_ice = 4000;         % wavespeed
         M.G_ice = 50e4;         % Shear modulus (MPa)
         M.G_till = M.G_ice;     % Shear modulus (MPa) is identical on both sides
-        M.R = 10e3;              % Fault Size (m)
-        M.N = 10;               % Effective normal stress (MPa)
-        M.L = 1e-4;             % Frictional state evolution distance
+        M.R = 10e3;             % Fault Size (m)
+        M.N = 200;              % Effective normal stress (MPa)
+        M.L = 1e-3;             % Frictional state evolution distance (aka D sub C)
         
         case 'DavidGlacier'
         

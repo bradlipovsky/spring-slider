@@ -21,7 +21,7 @@ Y0      = [M.D0; M.Q0];                 % intial conditions
 % Run the slider!
 opt = odeset('InitialStep',M.dt,'Vectorized','on',...
     'RelTol',rtol,'AbsTol',atol,'OutputFcn',@outfunc);
-sol = ode45(@VQode,[0 M.WindowDuration],Y0,opt,M);
+sol = ode45(@VQode,[0 M.SimulationDuration],Y0,opt,M);
 
 % Evaluate fields.
 t = sol.x; 
