@@ -22,7 +22,7 @@ clear;
 M = LoadParams('DavidGlacier');
 
 % Run the slider
-M.WindowDuration = 60*60;
+M.SimulationDuration = 60*60*10;
 tic; [vtr,dt,D] = RunSlider(M); tt=toc;
 disp(['Simulation done in ' num2str(tt) ' s.']);
 
@@ -34,14 +34,7 @@ t = dt*(0:numel(vtr)-1);
 
 % Make plots
 figure(1);
-% subplot(1,2,1);
-plot(t,detrend(vtr),'linewidth',2); 
-xlabel('Time (s)'); ylabel('Seismic Particle Velocity (nm/s)');
+plot(t,vtr/1e3,'linewidth',2); 
+xlabel('Time (s)'); ylabel('Seismic Particle Velocity (mm/s)');
 set(gca,'fontsize',18); axis tight; 
 yl=ylim; ylim( [min(yl(1)/2,1.25*yl(1)) 1.25*yl(2)]);
-
-% subplot(1,2,2);
-% plot(f,abs(ft),'-','linewidth',2);
-% xlim([5 90]); ylim([0 1.25*max(abs(ft(f<90)))]); % Event 49
-% xlabel('Frequency (Hz)'); ylabel('Spectral Power (m/s)^2 / Hz');
-% set(gca,'fontsize',18);

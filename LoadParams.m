@@ -54,14 +54,18 @@ switch situ
         M.L = 1e-3;             % Frictional state evolution distance (aka D sub C)
         
         case 'DavidGlacier'
+            
+        M.L = 1e-4;
+        M.G_till = 3664; 
+        M.R = 1500;
+        M.N = 1;
         
-        M.Vs = 4.86e-4;
-        M.G_till = 100;
-        M.R = 200;
-        M.N = 0.04;
-        M.H = 10e3; % Source-to-receiver distance
+        M.H = 180e3; % Source-to-receiver distance
         M.Q_ice = 100;  % quality factor
-
+        M.Vs = 1.6e-5;
+        M.G_ice  = M.G_till;
+        M.nui = 0.25;   M.nub = M.nui;
+        M.rho_till = 2000; M.c_ice = 2000;
       
         case 'CompliantBed'
         M.Vs = 4.86e-4;

@@ -47,10 +47,10 @@ if M.FarfieldVelocity
 
 
 	% Valid for large Q
-	% v2 = M.z_till/(M.z_ice + M.z_till) * M.R^2/(M.c_ice*M.H) * farfield(A_interp,dt,M.R,M.H,M.c_ice,M.Q_ice);
+	v2 = M.z_till/(M.z_ice + M.z_till) * M.R^2/(M.c_ice*M.H) * farfield(A_interp,dt,M.R,M.H,M.c_ice,M.Q_ice);
 
 	% Account for the bimaterial interface (inf Q)
- 	v2 = M.z_till/(M.z_ice + M.z_till) * M.R^2/(M.c_ice*M.H) * A_interp;
+%  	v2 = M.z_till/(M.z_ice + M.z_till) * M.R^2/(M.c_ice*M.H) * A_interp;
 
 	% Don't decimate.
 	tr = v2;
