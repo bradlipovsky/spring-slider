@@ -22,7 +22,7 @@ clear;
 M = LoadParams('DavidGlacier');
 
 % Run the slider
-M.SimulationDuration = 60*60*10;
+M.SimulationDuration = 60*60*2;
 tic; [vtr,dt,D] = RunSlider(M); tt=toc;
 disp(['Simulation done in ' num2str(tt) ' s.']);
 
@@ -34,7 +34,7 @@ t = dt*(0:numel(vtr)-1);
 
 % Make plots
 figure(1);
-plot(t,vtr/1e3,'linewidth',2); 
-xlabel('Time (s)'); ylabel('Seismic Particle Velocity (mm/s)');
-set(gca,'fontsize',18); axis tight; 
+plot(t/60,vtr,'linewidth',2); 
+xlabel('Time (min)'); ylabel('Seismic Particle Velocity (nm/s)');
+set(gca,'fontsize',18); axis tight; hold on;
 yl=ylim; ylim( [min(yl(1)/2,1.25*yl(1)) 1.25*yl(2)]);

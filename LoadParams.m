@@ -55,10 +55,12 @@ switch situ
         
         case 'DavidGlacier'
             
-        M.L = 1e-4;
-        M.G_till = 3664; 
-        M.R = 1500;
+        M.L = 1e-3;
+        M.R = 50;
         M.N = 1;
+        M.G_till = 3664; 
+        M.G_till = 3664 * 2 / ( 1 + coth(M.R/1600) );  % Includes effect
+                                            % of variable ice thickness.
         
         M.H = 180e3; % Source-to-receiver distance
         M.Q_ice = 100;  % quality factor
@@ -106,7 +108,8 @@ end
 % Derived quantities
 M = DerivedParams(M);
 
-
+M.Lc = M.L * M.G_till / M.N / (M.b - M.a) / 2/pi;
+disp(['Critical Patch Size:  ' num2str(M.Lc)]);
 
 end
 
