@@ -56,8 +56,8 @@ switch situ
         case 'DavidGlacier'
             
         M.L = 1e-3;
-        M.R = 50;
-        M.N = 1;
+        M.R = 33;
+        M.N = 1.5;
         M.G_till = 3664; 
         M.G_till = 3664 * 2 / ( 1 + coth(M.R/1600) );  % Includes effect
                                             % of variable ice thickness.

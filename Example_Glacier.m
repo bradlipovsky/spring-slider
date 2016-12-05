@@ -22,7 +22,7 @@ clear;
 M = LoadParams('DavidGlacier');
 
 % Run the slider
-M.SimulationDuration = 60*60*2;
+M.SimulationDuration = 60*60*4;
 tic; [vtr,dt,D] = RunSlider(M); tt=toc;
 disp(['Simulation done in ' num2str(tt) ' s.']);
 
